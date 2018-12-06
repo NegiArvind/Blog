@@ -1,4 +1,4 @@
-{% load static%}
+{% load staticfiles %}
 <html>
     <head>
       <title>Django blog</title>
@@ -6,10 +6,22 @@
       <link rel="stylesheet" href="{% static 'css/base.css' %}">
     </head>
     <body>
-      <header>
-        <h1><a href="/">Django blog</a></h1>
-      </header>
       <div class="container">
+        <header>
+          <div class="nav-left">
+            <h1><a href="/">Django blog</a></h1>
+          </div>
+          <div class="nav-right">
+            <a href="{% url 'blog:post_new' %}">+ New Blog Post</a>
+          </div>
+        </header>
+        {% if user.is_authenticated %} <!-- user is the current user. we are checking whether user is authenticated or not-->
+          <p>Hi {{user.username}}</p>
+          <a href="{%url 'logout'%}">Logout</a> <!-- logout is django default url-->
+        {% else %}
+          <p>You are not logged in </p>
+          <a href="{% url 'login' %}">Login</a> <!-- login is django default url-->
+        {%endif%}
         {% block content %}
         {% endblock content%}
       </div>

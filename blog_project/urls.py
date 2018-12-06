@@ -20,5 +20,7 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('blog.urls'))
+    path('accounts/',include('django.contrib.auth.urls')), # default authentication url
+    path('accounts/',include('accounts.urls')), # custom url
+    path('',include('blog.urls')),
 ]
